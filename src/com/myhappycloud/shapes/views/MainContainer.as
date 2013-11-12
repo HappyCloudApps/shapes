@@ -35,5 +35,20 @@ package com.myhappycloud.shapes.views
 				removeChildAt(0);
 		}
 
+		public function setChallenge(i : int) : void
+		{
+			clearViews();
+			switch(i){
+				case 1:
+					addChild(new Challenge1View());
+					break;
+				case 2:
+					addChild(new Challenge2View());
+					break;
+					//TODO do case 3
+				default:
+			}
+		}
+
 	}
 }

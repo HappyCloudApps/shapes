@@ -1,5 +1,8 @@
 package com.myhappycloud.shapes
 {
+	import com.myhappycloud.shapes.mediators.Challenge1Mediator;
+	import com.myhappycloud.shapes.views.Challenge2View;
+	import com.myhappycloud.shapes.views.Challenge1View;
 	import com.myhappycloud.shapes.mediators.UserViewMediator;
 	import com.myhappycloud.shapes.views.UserView;
 	import com.myhappycloud.shapes.mediators.SplashViewMediator;
@@ -32,6 +35,8 @@ package com.myhappycloud.shapes
 			mediatorMap.mapView(MainContainer, MainContainerMediator);
 			mediatorMap.mapView(SplashView, SplashViewMediator);
 			mediatorMap.mapView(UserView, UserViewMediator);
+			mediatorMap.mapView(Challenge1View, Challenge1Mediator);
+			//mediatorMap.mapView(Challenge2View, Challenge2Mediator);
 		
 //			injector.mapSingletonOf(IPrefs, Preferences);
 		

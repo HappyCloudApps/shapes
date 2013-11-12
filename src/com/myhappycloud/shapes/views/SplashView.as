@@ -20,7 +20,7 @@ package com.myhappycloud.shapes.views
 			addChild(_mc);
 			//_mc.title_txt.text = "SplashScreen - Hello world w/Robotlegs";
 			
-			setTimeout(close, 2000);
+			setTimeout(close, 1);
 		}
 
 		private function close() : void

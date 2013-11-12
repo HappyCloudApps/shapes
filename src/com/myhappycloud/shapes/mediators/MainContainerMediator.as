@@ -18,6 +18,24 @@ package com.myhappycloud.shapes.mediators
 			view.init();
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_SPLASH, setSplashScreen, ViewEvent);
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_USERSCREEN, setUserScreen, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_CHALLENGE_1, setChallenge1, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_CHALLENGE_2, setChallenge2, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_CHALLENGE_3, setChallenge3, ViewEvent);
+		}
+
+		private function setChallenge1(e:ViewEvent) : void
+		{
+			view.setChallenge(1);
+		}
+		
+		private function setChallenge2(e:ViewEvent) : void
+		{
+			view.setChallenge(2);
+		}
+		
+		private function setChallenge3(e:ViewEvent) : void
+		{
+			view.setChallenge(3);
 		}
 
 		private function setUserScreen(e:ViewEvent) : void
