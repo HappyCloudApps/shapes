@@ -4,11 +4,10 @@ package com.myhappycloud.shapes.views
 	/**
 	 * @author Eder
 	 */
-	public class Challenge2View extends Sprite
+	public class MenuView extends Sprite
 	{
 		public function init() : void
 		{
-			
 		}
 	}
 }
