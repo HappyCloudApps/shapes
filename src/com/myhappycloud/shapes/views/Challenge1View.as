@@ -2,6 +2,7 @@ package com.myhappycloud.shapes.views
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenLite;
+	import com.myhappycloud.shapes.events.ViewEvent;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.events.Event;
@@ -34,13 +35,18 @@ package com.myhappycloud.shapes.views
 			trace("Challenge1View.init()");
 			mc = new Reto1();
 			addChild(mc);
-			
+			mc.back_btn.addEventListener(MouseEvent.CLICK, goBack);
 			mc.addEventListener(MouseEvent.MOUSE_DOWN, kamyMove);
 			mc.addEventListener(MouseEvent.MOUSE_UP, stopMoving);
 			assignShapes();
 			generateShapes();
 			appearShapes();
 			mc.addEventListener(Event.ENTER_FRAME, globalEvent);
+		}
+		
+		private function goBack(e:MouseEvent):void 
+		{
+			dispatchEvent(new ViewEvent(ViewEvent.RETURN_TO_LAST_SCREEN));
 		}
 		
 		function randomizeArray(array:Array):Array{
@@ -99,7 +105,6 @@ package com.myhappycloud.shapes.views
 			}
 			else
 			{
-				
 				return;
 			}
 		}
@@ -128,6 +133,7 @@ package com.myhappycloud.shapes.views
 				trace("Removed: " + onScreenShapes.length + "Added: " + rootArray.length);
 				if (currentShape.y>766) 
 				{
+					dispatchEvent(new ViewEvent(ViewEvent.SET_CONGRATS_SCREEN));
 					trace("GAME OVER");
 				}
 			}
