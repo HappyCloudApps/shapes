@@ -1,5 +1,6 @@
 package com.myhappycloud.shapes.views
 {
+	import assets.shapes.UsersScreen;
 	import com.myhappycloud.shapes.events.ViewEvent;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
@@ -8,8 +9,11 @@ package com.myhappycloud.shapes.views
 	 */
 	public class UserView extends Sprite
 	{
+		private var mc : UsersScreen;
 		public function init() : void
 		{
+			//TODO add navigation
+			mc = new UsersScreen();
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 			trace("UserView.init() - choose challenge");
 		}
