@@ -1,36 +1,46 @@
 package com.myhappycloud.shapes.views
 {
 	import assets.shapes.UsersScreen;
+
 	import com.myhappycloud.shapes.events.ViewEvent;
-	import flash.display.Sprite;
-	import flash.events.KeyboardEvent;
+	import com.myhappycloud.utils.Screen;
+
+	import flash.events.MouseEvent;
+
 	/**
 	 * @author Eder
 	 */
-	public class UserView extends Sprite
+	public class UserView extends Screen
 	{
 		private var mc : UsersScreen;
+
 		public function init() : void
 		{
-			//TODO add navigation
 			mc = new UsersScreen();
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 			trace("UserView.init() - choose challenge");
+			addChild(mc);
+
+			onClick(mc.btn_parents, clickedParents);
+			onClick(mc.btn_pic, clickedCamera);
+			onClick(mc.btn_play, clickedPlay);
 		}
 
-		private function keyPressed(e : KeyboardEvent) : void
+		private function clickedParents(e : MouseEvent) : void
 		{
-			var challengeId:int = e.keyCode-48;
-			
-			if(challengeId==1)
-			dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_1));
-			else if(challengeId==2)
-			dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_2));
-			//TODO challenge 3
-			//else if(challengeId==3)
-			//dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_3));
-			
+			trace("UserView.clickedParents(e)");
+			dispatchEvent(new ViewEvent(ViewEvent.SET_PARENTS_SCREEN));
 		}
-		
+
+		private function clickedPlay(e : MouseEvent) : void
+		{
+			trace("UserView.clickedPlay(e)");
+			dispatchEvent(new ViewEvent(ViewEvent.SET_MENU_SCREEN));
+		}
+
+		private function clickedCamera(e : MouseEvent) : void
+		{
+			trace("UserView.clickedCamera(e)");
+		}
+
 	}
 }

@@ -2,17 +2,17 @@ package com.myhappycloud.shapes.views
 {
 	import com.myhappycloud.shapes.events.ViewEvent;
 	import flash.events.MouseEvent;
+	import assets.shapes.MsgParentsScreen;
 	import com.myhappycloud.utils.Screen;
-	import assets.shapes.VideosScreen;
 	/**
 	 * @author Eder
 	 */
-	public class VideosView extends Screen
+	public class MessageParentsView extends Screen
 	{
-		private var mc : VideosScreen;
+		private var mc : MsgParentsScreen;
 		public function init() : void
 		{
-			mc = new VideosScreen();
+			mc = new MsgParentsScreen();
 			addChild(mc);
 			
 			onClick(mc.back_btn, goBack);
@@ -20,7 +20,7 @@ package com.myhappycloud.shapes.views
 
 		private function goBack(e:MouseEvent) : void
 		{
-			trace("VideosView.goBack(e)");
+			trace("MessageParentsView.goBack(e)");
 			dispatchEvent(new ViewEvent(ViewEvent.RETURN_TO_LAST_SCREEN));
 		}
 	}

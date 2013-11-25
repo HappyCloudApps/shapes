@@ -15,11 +15,14 @@ package com.myhappycloud.shapes.views
 		private const VIDEOS_SCREEN : int = 4;
 		private const PARENTS_SCREEN : int = 5;
 		private const ADJUSTMENTS_SCREEN : int = 6;
-		private const TOY : int = 7;
+		private const GAME_SCREEN : int = 7;
 		private const CHALLENGE_1 : int = 8;
 		private const CHALLENGE_2 : int = 9;
 		private const CHALLENGE_3 : int = 10;
 		private const CONGRATS_SCREEN : int = 11;
+		private const MSG_PARENTS_SCREEN : int = 12;
+		private const TIPS_SCREEN : int = 13;
+		private const STATS_SCREEN : int = 14;
 
 		private var _screenHistory : Array;
 
@@ -64,7 +67,7 @@ package com.myhappycloud.shapes.views
 					addChild(new Challenge2View());
 					addScreenHistory(CHALLENGE_2);
 					break;
-				case 2:
+				case 3:
 					addChild(new Challenge3View());
 					addScreenHistory(CHALLENGE_3);
 					break;
@@ -106,7 +109,7 @@ package com.myhappycloud.shapes.views
 				case PARENTS_SCREEN:
 					setParentsScreen();
 					break;
-				case TOY:
+				case GAME_SCREEN:
 					setGame();
 					break;
 				case CHALLENGE_1:
@@ -166,8 +169,8 @@ package com.myhappycloud.shapes.views
 		public function setGame() : void
 		{
 			clearViews();
-			addScreenHistory(TOY);
-			addChild(new ToyView());
+			addScreenHistory(GAME_SCREEN);
+			addChild(new GameView());
 		}
 
 		public function setMenuScreen() : void
@@ -182,6 +185,27 @@ package com.myhappycloud.shapes.views
 			clearViews();
 			addScreenHistory(ADJUSTMENTS_SCREEN);
 			addChild(new AdjustmentsView());
+		}
+
+		public function setMsgScreen() : void
+		{
+			clearViews();
+			addScreenHistory(MSG_PARENTS_SCREEN);
+			addChild(new MessageParentsView());
+		}
+		
+		public function setTipsScreen() : void
+		{
+			clearViews();
+			addScreenHistory(TIPS_SCREEN);
+			addChild(new TipsView());
+		}
+		
+		public function setStatsScreen() : void
+		{
+			clearViews();
+			addScreenHistory(STATS_SCREEN);
+			addChild(new StatsView());
 		}
 	}
 }

@@ -1,15 +1,15 @@
 package com.myhappycloud.shapes.mediators
 {
 	import com.myhappycloud.shapes.events.ViewEvent;
-	import com.myhappycloud.shapes.views.AdjustmentsView;
+	import com.myhappycloud.shapes.views.StatsView;
 	import org.robotlegs.mvcs.Mediator;
 	/**
 	 * @author Eder
 	 */
-	public class AdustmentsMediator extends Mediator
+	public class StatsMediator extends Mediator
 	{
 		[Inject]
-		public var view : AdjustmentsView;
+		public var view : StatsView;
 		
 		override public function onRegister() : void
 		{

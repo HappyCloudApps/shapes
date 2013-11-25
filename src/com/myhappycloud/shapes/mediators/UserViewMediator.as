@@ -14,9 +14,9 @@ package com.myhappycloud.shapes.mediators
 		override public function onRegister() : void
 		{
 			view.init();
-			eventMap.mapListener(view, ViewEvent.SET_CHALLENGE_1, dispatch, ViewEvent);
-			eventMap.mapListener(view, ViewEvent.SET_CHALLENGE_2, dispatch, ViewEvent);
-			eventMap.mapListener(view, ViewEvent.SET_CHALLENGE_3, dispatch, ViewEvent);
+			
+			eventMap.mapListener(view, ViewEvent.SET_PARENTS_SCREEN, dispatch, ViewEvent);
+			eventMap.mapListener(view, ViewEvent.SET_MENU_SCREEN, dispatch, ViewEvent);
 		}
 
 	}

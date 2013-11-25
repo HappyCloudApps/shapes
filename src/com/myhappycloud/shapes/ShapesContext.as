@@ -1,16 +1,22 @@
 package com.myhappycloud.shapes
 {
+	import com.myhappycloud.shapes.mediators.MessageParentsMediator;
+	import com.myhappycloud.shapes.mediators.TipsMediator;
+	import com.myhappycloud.shapes.mediators.StatsMediator;
+	import com.myhappycloud.shapes.views.MessageParentsView;
+	import com.myhappycloud.shapes.views.TipsView;
+	import com.myhappycloud.shapes.views.StatsView;
 	import com.myhappycloud.shapes.models.UserData;
 	import com.myhappycloud.shapes.models.IUserData;
 	import com.myhappycloud.shapes.mediators.CongratsMediator;
 	import com.myhappycloud.shapes.mediators.Challenge3Mediator;
-	import com.myhappycloud.shapes.mediators.ToyMediator;
+	import com.myhappycloud.shapes.mediators.GameMediator;
 	import com.myhappycloud.shapes.mediators.AdustmentsMediator;
 	import com.myhappycloud.shapes.mediators.ParentsMediator;
 	import com.myhappycloud.shapes.mediators.VideosMediator;
 	import com.myhappycloud.shapes.views.CongratsView;
 	import com.myhappycloud.shapes.views.Challenge3View;
-	import com.myhappycloud.shapes.views.ToyView;
+	import com.myhappycloud.shapes.views.GameView;
 	import com.myhappycloud.shapes.views.AdjustmentsView;
 	import com.myhappycloud.shapes.views.ParentsView;
 	import com.myhappycloud.shapes.views.VideosView;
@@ -56,10 +62,14 @@ package com.myhappycloud.shapes
 			mediatorMap.mapView(MenuView, MenuMediator);
 			mediatorMap.mapView(VideosView, VideosMediator);
 			mediatorMap.mapView(ParentsView, ParentsMediator);
+			
 			mediatorMap.mapView(AdjustmentsView, AdustmentsMediator);
+			mediatorMap.mapView(StatsView, StatsMediator);
+			mediatorMap.mapView(TipsView, TipsMediator);
+			mediatorMap.mapView(MessageParentsView, MessageParentsMediator);
 			
 			// game
-			mediatorMap.mapView(ToyView, ToyMediator);
+			mediatorMap.mapView(GameView, GameMediator);
 			mediatorMap.mapView(Challenge1View, Challenge1Mediator);
 			mediatorMap.mapView(Challenge2View, Challenge2Mediator);
 			mediatorMap.mapView(Challenge3View, Challenge3Mediator);

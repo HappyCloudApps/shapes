@@ -18,6 +18,9 @@ package com.myhappycloud.shapes.events
 		public static const SET_CONGRATS_SCREEN : String = "SET_CONGRATS_SCREEN";
 		public static const SET_VIDEOS_SCREEN : String = "SET_VIDEOS_SCREEN";
 		public static const SET_ADJUSTMENTS_SCREEN : String = "SET_ADJUSTMENTS_SCREEN";
+		public static const SET_MESSAGE_PARENTS : String = "SET_MESSAGE_PARENTS";
+		public static const SET_STATS_SCREEN : String = "SET_STATS_SCREEN";
+		public static const SET_TIPS_SCREEN : String = "SET_TIPS_SCREEN";
 
 		private var _type : String;
 		

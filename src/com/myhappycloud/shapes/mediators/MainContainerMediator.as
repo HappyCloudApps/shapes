@@ -20,8 +20,13 @@ package com.myhappycloud.shapes.mediators
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_USERSCREEN, setUserScreen, ViewEvent);
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_VIDEOS_SCREEN, setVideosScreen, ViewEvent);
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_PARENTS_SCREEN, setParentsScreen, ViewEvent);
-			eventMap.mapListener(eventDispatcher, ViewEvent.SET_ADJUSTMENTS_SCREEN, setAdjustmentsScreen, ViewEvent);
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_MENU_SCREEN, setMenuScreen, ViewEvent);
+			
+			//PARENTS MENU
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_ADJUSTMENTS_SCREEN, setAdjustmentsScreen, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_STATS_SCREEN, setStatsScreen, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_TIPS_SCREEN, setTipsScreen, ViewEvent);
+			eventMap.mapListener(eventDispatcher, ViewEvent.SET_MESSAGE_PARENTS, setMsgScreen, ViewEvent);
 
 
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_GAME_SCREEN, setGame, ViewEvent);
@@ -31,6 +36,21 @@ package com.myhappycloud.shapes.mediators
 			eventMap.mapListener(eventDispatcher, ViewEvent.SET_CONGRATS_SCREEN, setCongrats, ViewEvent);
 
 			eventMap.mapListener(eventDispatcher, ViewEvent.RETURN_TO_LAST_SCREEN, goBack, ViewEvent);
+		}
+
+		private function setStatsScreen(e:ViewEvent) : void
+		{
+			view.setStatsScreen();
+		}
+
+		private function setTipsScreen(e:ViewEvent) : void
+		{			
+			view.setTipsScreen();
+		}
+
+		private function setMsgScreen(e:ViewEvent) : void
+		{
+			view.setMsgScreen();
 		}
 
 		private function setMenuScreen(e:ViewEvent) : void

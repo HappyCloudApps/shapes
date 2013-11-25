@@ -1,5 +1,6 @@
 package com.myhappycloud.shapes.views
 {
+	import assets.shapes.SplashScreen;
 	import com.myhappycloud.shapes.events.ViewEvent;
 
 	import flash.display.Sprite;
@@ -10,22 +11,24 @@ package com.myhappycloud.shapes.views
 	 */
 	public class SplashView extends Sprite
 	{
-		//TODO add splash screen to assets
 		private var _mc : Sprite;
 
 		public function SplashView()
 		{
 			trace("SplashView.SplashView()");
-			_mc = new Sprite();
+			_mc = new SplashScreen();
 			addChild(_mc);
 			//_mc.title_txt.text = "SplashScreen - Hello world w/Robotlegs";
 			
-			setTimeout(close, 1);
+			//TODO add some more time to timeout
+			setTimeout(close, 10);
 		}
 
 		private function close() : void
 		{
-			dispatchEvent(new ViewEvent(ViewEvent.SET_USERSCREEN));
+			//TODO return to normal this line
+//			dispatchEvent(new ViewEvent(ViewEvent.SET_USERSCREEN));
+			dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_3));
 		}
 	}
 }
