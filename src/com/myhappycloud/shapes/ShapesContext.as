@@ -1,5 +1,7 @@
 package com.myhappycloud.shapes
 {
+	import com.myhappycloud.shapes.commands.SetLangCommand;
+	import com.myhappycloud.shapes.events.ModelEvent;
 	import com.myhappycloud.shapes.mediators.MessageParentsMediator;
 	import com.myhappycloud.shapes.mediators.TipsMediator;
 	import com.myhappycloud.shapes.mediators.StatsMediator;
@@ -53,7 +55,7 @@ package com.myhappycloud.shapes
 			trace("ShapeContext.startup()");
 
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitialSetupCommand);
-//			commandMap.mapEvent(ViewEvent.SET_START_SCREEN, SetStartCommand);
+			commandMap.mapEvent(ModelEvent.LANGUAGE_CHANGE, SetLangCommand);
 
 			//menus
 			mediatorMap.mapView(MainContainer, MainContainerMediator);

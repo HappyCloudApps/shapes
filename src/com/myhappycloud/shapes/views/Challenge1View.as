@@ -4,9 +4,10 @@ package com.myhappycloud.shapes.views
 	import assets.shapes.ShapeChallenge1;
 
 	import com.myhappycloud.shapes.events.ViewEvent;
+	import com.myhappycloud.shapes.views.utils.ArrUtils;
+	import com.myhappycloud.utils.Screen;
 
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.utils.setTimeout;
@@ -14,7 +15,7 @@ package com.myhappycloud.shapes.views
 	/**
 	 * @author Eder
 	 */
-	public class Challenge1View extends Sprite
+	public class Challenge1View extends Screen
 	{
 		private var mc : Challenge1Screen;
 		private var distance : int;
@@ -30,20 +31,14 @@ package com.myhappycloud.shapes.views
 		private var framesArray : Array = [];
 		private var incorrectNumber : Number;
 		private var finalNumberIncorrect : Number;
-		private var j : int = 0;
+		private var currentShapeId : int = 0;
 
-		public function init() : void
+		public function Challenge1View()
 		{
-			trace("Challenge1View.init()");
 			mc = new Challenge1Screen();
 			addChild(mc);
-			mc.back_btn.addEventListener(MouseEvent.CLICK, goBack);
-			mc.addEventListener(MouseEvent.MOUSE_DOWN, kamyMove);
-			mc.addEventListener(MouseEvent.MOUSE_UP, stopMoving);
-			assignShapes();
-			generateShapes();
-			appearShapes();
-			mc.addEventListener(Event.ENTER_FRAME, globalEvent);
+
+			onClick(mc.back_btn, goBack);
 		}
 
 		private function goBack(e : MouseEvent) : void
@@ -51,14 +46,16 @@ package com.myhappycloud.shapes.views
 			dispatchEvent(new ViewEvent(ViewEvent.RETURN_TO_LAST_SCREEN));
 		}
 
-		function randomizeArray(array : Array) : Array
+		public function init() : void
 		{
-			var newArray : Array = new Array();
-			while (array.length > 0)
-			{
-				newArray.push(array.splice(Math.floor(Math.random() * array.length), 1));
-			}
-			return newArray;
+			trace("Challenge1View.init()");
+
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, startMoving);
+			stage.addEventListener(MouseEvent.MOUSE_UP, stopMoving);
+			assignShapes();
+			generateShapes();
+			appearShapes();
+			mc.addEventListener(Event.ENTER_FRAME, update);
 		}
 
 		private function assignShapes() : void
@@ -80,7 +77,7 @@ package com.myhappycloud.shapes.views
 				while (finalNumberIncorrect == finalNumber);
 				framesArray.push(finalNumberIncorrect);
 			}
-			framesArray = randomizeArray(framesArray);
+			framesArray = ArrUtils.randomizeArray(framesArray);
 
 			trace("Correct Shapes: " + framesArray);
 		}
@@ -98,14 +95,15 @@ package com.myhappycloud.shapes.views
 		private function appearShapes() : void
 		{
 			currentShape = rootArray.pop();
-			currentShape.gotoAndStop(framesArray[j]);
+			currentShape.gotoAndStop(framesArray[currentShapeId]);
 			onScreenShapes.push(currentShape);
 			trace("Shapes Screen: " + onScreenShapes);
 			mc.addChild(currentShape);
 			currentShape.y = 0;
-			if (j < 19)
+			currentShape.x = Math.random()*700+250;
+			if (currentShapeId < 19)
 			{
-				j++;
+				currentShapeId++;
 				setTimeout(appearShapes, 2000);
 			}
 			else
@@ -114,21 +112,24 @@ package com.myhappycloud.shapes.views
 			}
 		}
 
-		private function globalEvent(e : Event) : void
+		private function update(e : Event) : void
 		{
 			globex = mc.globe.x + mc.globe.width;
 			var globeMove : Number = mc.kamy_mc.x - globex;
-			mc.globe.x += globeMove / 10;
+			mc.globe.x += globeMove / 7;
+			var shape:MovieClip;
 			for (var i : int = onScreenShapes.length - 1; i >= 0; i--)
 			{
-				onScreenShapes[i].y += 4;
+				shape = onScreenShapes[i];
+				shape.y += 4;
 				removeShapes(i);
 			}
 		}
 
 		private function removeShapes(i : int) : void
 		{
-			if (onScreenShapes[i].y > 766)
+			var shape:MovieClip = onScreenShapes[i];			
+			if (shape.y > 766)
 			{
 				mc.removeChild(onScreenShapes[i]);
 				var outShape : MovieClip = onScreenShapes[i];
@@ -143,7 +144,7 @@ package com.myhappycloud.shapes.views
 			}
 		}
 
-		private function kamyMove(e : MouseEvent) : void
+		private function startMoving(e : MouseEvent) : void
 		{
 			addEventListener(Event.ENTER_FRAME, move);
 		}
@@ -171,5 +172,6 @@ package com.myhappycloud.shapes.views
 		{
 			removeEventListener(Event.ENTER_FRAME, move);
 		}
+
 	}
 }

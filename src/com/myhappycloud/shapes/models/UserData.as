@@ -70,11 +70,12 @@ package com.myhappycloud.shapes.models
 
 		public function get language() : String
 		{
-			return language;
+			return _language;
 		}
 
 		public function set setLanguage(str : String) : void
 		{
+			trace("UserData.setLanguage(str) - "+str);
 			_language = str;
 			setSO();
 		}

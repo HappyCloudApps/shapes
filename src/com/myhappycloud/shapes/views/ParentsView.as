@@ -1,10 +1,11 @@
 package com.myhappycloud.shapes.views
 {
-	import com.myhappycloud.shapes.events.ViewEvent;
-	import flash.events.MouseEvent;
-	import com.myhappycloud.utils.Screen;
 	import assets.shapes.ParentsScreen;
-	import flash.display.Sprite;
+
+	import com.myhappycloud.shapes.events.ViewEvent;
+	import com.myhappycloud.utils.Screen;
+
+	import flash.events.MouseEvent;
 	/**
 	 * @author Eder
 	 */

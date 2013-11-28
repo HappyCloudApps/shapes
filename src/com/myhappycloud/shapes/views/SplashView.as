@@ -27,8 +27,8 @@ package com.myhappycloud.shapes.views
 		private function close() : void
 		{
 			//TODO return to normal this line
-//			dispatchEvent(new ViewEvent(ViewEvent.SET_USERSCREEN));
-			dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_3));
+			dispatchEvent(new ViewEvent(ViewEvent.SET_USERSCREEN));
+//			dispatchEvent(new ViewEvent(ViewEvent.SET_CHALLENGE_3));
 		}
 	}
 }
