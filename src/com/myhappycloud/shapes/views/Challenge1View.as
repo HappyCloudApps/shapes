@@ -1,5 +1,9 @@
 package com.myhappycloud.shapes.views
 {
+	import flash.display.Sprite;
+	import flash.display.DisplayObject;
+	import com.myhappycloud.shapes.views.activities.ShapeAct1;
+
 	import assets.shapes.Challenge1Screen;
 	import assets.shapes.ShapeChallenge1;
 
@@ -17,27 +21,29 @@ package com.myhappycloud.shapes.views
 	 */
 	public class Challenge1View extends Screen
 	{
+		private var SHAPE_POOL : uint = 10;
 		private var mc : Challenge1Screen;
 		private var distance : int;
-		private var speed : int = 10;
+		private var speed : int = 20;
 		private var movement : Number;
-		private var globex : int;
 		private var rootArray : Array;
 		private var onScreenShapes : Array = [];
 		private var currentShape : MovieClip;
-		private var correctNumber : Number;
-		private var finalNumber : Number;
-		private var ammountShapes : int = 10;
-		private var framesArray : Array = [];
-		private var incorrectNumber : Number;
-		private var finalNumberIncorrect : Number;
+		private var correctShapeId : uint;
+		private var NUM_CORRECT_SHAPES : int = 10;
+		private var NUM_WRONG_SHAPES : int = 10;
+		private var shapesIDs : Array = [];
 		private var currentShapeId : int = 0;
+		private var basketWidth : Number = 110;
+		// private var basketWidth:Number = 120-230;
+		private var shapesRemoved : Number = 0;
+		private var basketContainer : Sprite;
 
 		public function Challenge1View()
 		{
 			mc = new Challenge1Screen();
 			addChild(mc);
-
+			basketContainer = Sprite(mc.kamy_mc.getChildByName("container"));
 			onClick(mc.back_btn, goBack);
 		}
 
@@ -52,96 +58,137 @@ package com.myhappycloud.shapes.views
 
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, startMoving);
 			stage.addEventListener(MouseEvent.MOUSE_UP, stopMoving);
-			assignShapes();
+			assignShapesIDs();
 			generateShapes();
 			appearShapes();
 			mc.addEventListener(Event.ENTER_FRAME, update);
 		}
 
-		private function assignShapes() : void
+		private function assignShapesIDs() : void
 		{
-			correctNumber = Math.random() * 10;
-			finalNumber = Math.ceil(correctNumber);
-			for (var i : int = 0; i < ammountShapes; i++)
+			// save the correct shapeId
+			correctShapeId = Math.ceil(Math.random() * 10);
+			MovieClip(mc.globe.getChildByName("shape_mc")).gotoAndStop(correctShapeId);
+
+			for (var i : int = 0; i < NUM_CORRECT_SHAPES; i++)
 			{
-				framesArray.push(finalNumber);
+				// populate array with correct ids
+				shapesIDs.push(correctShapeId);
 			}
 
-			for (var j : int = 0; j < ammountShapes; j++)
+			var wrongId : uint;
+			for (var j : int = 0; j < NUM_WRONG_SHAPES; j++)
 			{
 				do
 				{
-					incorrectNumber = Math.random() * 10;
-					finalNumberIncorrect = Math.ceil(incorrectNumber);
+					// calculate a random number until its different from correctId
+					wrongId = Math.ceil(Math.random() * 10);
 				}
-				while (finalNumberIncorrect == finalNumber);
-				framesArray.push(finalNumberIncorrect);
+				while (wrongId == correctShapeId);
+				// populate array with wrong ids
+				shapesIDs.push(wrongId);
 			}
-			framesArray = ArrUtils.randomizeArray(framesArray);
+			// shuffle array
+			shapesIDs = ArrUtils.randomizeArray(shapesIDs);
 
-			trace("Correct Shapes: " + framesArray);
+			trace("Challenge1View.assignShapes()");
+			trace(shapesIDs);
 		}
 
 		private function generateShapes() : void
 		{
+			trace("Challenge1View.generateShapes()");
+			// make the necessary number of shapes
 			rootArray = [];
-			for (var i : int = 0; i < ammountShapes; i++)
+			for (var i : int = 0; i < SHAPE_POOL; i++)
 			{
 				rootArray.push(new ShapeChallenge1());
 			}
-			trace("Shapes Array: " + rootArray);
 		}
 
 		private function appearShapes() : void
 		{
+			// get a shape movieclip
 			currentShape = rootArray.pop();
-			currentShape.gotoAndStop(framesArray[currentShapeId]);
-			onScreenShapes.push(currentShape);
-			trace("Shapes Screen: " + onScreenShapes);
-			mc.addChild(currentShape);
-			currentShape.y = 0;
-			currentShape.x = Math.random()*700+250;
-			if (currentShapeId < 19)
+			// sets the shape from the randomized array
+			currentShape.gotoAndStop(shapesIDs[currentShapeId]);
+			trace('shapesIDs: ' + (shapesIDs[currentShapeId]));
+
+			// creates aux class for shape
+			var shape : ShapeAct1 = new ShapeAct1(currentShape, currentShapeId);
+			shape.removeSignal.addOnce(removeShape);
+			shape.checkBasketSignal.addOnce(checkBasket);
+			onScreenShapes.push(shape);
+
+			mc.addChild(shape.mc);
+
+			currentShapeId++;
+			if (currentShapeId < shapesIDs.length)
 			{
-				currentShapeId++;
 				setTimeout(appearShapes, 2000);
 			}
 			else
 			{
+				// all done, no more shapes appearing
 				return;
+			}
+		}
+
+		private function checkBasket(shape:ShapeAct1) : void
+		{
+			var startX:Number = mc.kamy_mc.x+120;
+			var endX:Number = startX+basketWidth;
+			if(shape.mc.x>startX&&shape.mc.x<endX)
+			{
+				//shape going in
+				var shapeIndex : int = onScreenShapes.indexOf(shape);
+				onScreenShapes.splice(shapeIndex, 1);
+				basketContainer.addChild(shape.mc);
+				shape.mc.x-=mc.kamy_mc.x;
+				shape.mc.y-=mc.kamy_mc.y;
+				shape.animateIn();
+			}
+			else
+			{
+				//shape going out
+				
 			}
 		}
 
 		private function update(e : Event) : void
 		{
-			globex = mc.globe.x + mc.globe.width;
-			var globeMove : Number = mc.kamy_mc.x - globex;
+			// globe following kammy
+			var globeX : Number = mc.globe.x + mc.globe.width;
+			var globeMove : Number = mc.kamy_mc.x - globeX;
 			mc.globe.x += globeMove / 7;
-			var shape:MovieClip;
+
+			// moves falling shapes
+			var shape : ShapeAct1;
 			for (var i : int = onScreenShapes.length - 1; i >= 0; i--)
 			{
 				shape = onScreenShapes[i];
-				shape.y += 4;
-				removeShapes(i);
+				shape.moveDown(4);
 			}
 		}
 
-		private function removeShapes(i : int) : void
+		private function removeShape(shape : ShapeAct1) : void
 		{
-			var shape:MovieClip = onScreenShapes[i];			
-			if (shape.y > 766)
-			{
-				mc.removeChild(onScreenShapes[i]);
-				var outShape : MovieClip = onScreenShapes[i];
-				onScreenShapes.splice(i, 1);
-				rootArray.push(outShape);
-				trace("Removed: " + onScreenShapes.length + "Added: " + rootArray.length);
-				if (currentShape.y > 766)
-				{
-					dispatchEvent(new ViewEvent(ViewEvent.SET_CONGRATS_SCREEN));
-					trace("GAME OVER");
-				}
-			}
+			var shapeIndex : int = onScreenShapes.indexOf(shape);
+			if(shapeIndex>-1)
+				onScreenShapes.splice(shapeIndex, 1);
+			shape.mc.parent.removeChild(shape.mc);
+			rootArray.push(shape.mc);
+			shape.destroy();
+
+			shapesRemoved++;
+			trace('shapesRemoved: ' + (shapesRemoved));
+			if (shapesRemoved == shapesIDs.length)
+				gameOver();
+		}
+
+		private function gameOver() : void
+		{
+			dispatchEvent(new ViewEvent(ViewEvent.SET_CONGRATS_SCREEN));
 		}
 
 		private function startMoving(e : MouseEvent) : void
@@ -151,7 +198,6 @@ package com.myhappycloud.shapes.views
 
 		private function move(e : Event) : void
 		{
-			trace("Clicked");
 			distance = mouseX - 174;
 			movement = distance - mc.kamy_mc.x;
 			if (movement > speed)
@@ -172,6 +218,5 @@ package com.myhappycloud.shapes.views
 		{
 			removeEventListener(Event.ENTER_FRAME, move);
 		}
-
 	}
 }
