@@ -45,6 +45,9 @@ package com.myhappycloud.shapes.views
 			addChild(mc);
 			basketContainer = Sprite(mc.kamy_mc.getChildByName("container"));
 			onClick(mc.back_btn, goBack);
+			
+			mc.kamy_mc.cacheAsBitmap = true;
+			mc.globe.cacheAsBitmap = true;
 		}
 
 		private function goBack(e : MouseEvent) : void

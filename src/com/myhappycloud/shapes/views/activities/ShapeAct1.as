@@ -31,6 +31,8 @@ package com.myhappycloud.shapes.views.activities
 			mc.y = 0;
 			mc.rotation=0;
 			mc.x = Math.random() * 700 + 250;
+			
+			mc.cacheAsBitmap = true;
 		}
 
 		public function get mc() : MovieClip
@@ -75,6 +77,7 @@ package com.myhappycloud.shapes.views.activities
 
 		public function animateIn() : void
 		{
+			mc.cacheAsBitmap = false;
 			var rot:Number = 0;
 			if(mc.x<150)
 				rot=70;

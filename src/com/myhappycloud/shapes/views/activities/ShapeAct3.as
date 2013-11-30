@@ -37,6 +37,8 @@ package com.myhappycloud.shapes.views.activities
 			shadow = MovieClip(shape.getChildByName("shadow_mc"));
 			shadowXY = new Point(shadow.x, shadow.y);
 			shape.scaleX = shape.scaleY = .95;
+			
+			shadow.cacheAsBitmap = true;
 
 			shape.addEventListener(MouseEvent.MOUSE_DOWN, onDown, false, 0, true);
 		}

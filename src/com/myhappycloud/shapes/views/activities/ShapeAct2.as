@@ -13,6 +13,7 @@ package com.myhappycloud.shapes.views.activities
 
 		public function ShapeAct2(mc : MovieClip)
 		{
+			mc.cacheAsBitmap = true;
 			this.mc = mc;
 			addChild(mc);
 		}

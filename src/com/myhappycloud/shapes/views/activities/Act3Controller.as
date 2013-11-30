@@ -9,7 +9,7 @@ package com.myhappycloud.shapes.views.activities
 	 */
 	public class Act3Controller
 	{
-		private static const DIST_TOLERANCE : Number = 20;
+		private static const DIST_TOLERANCE : Number = 50;
 		private var shapeContainer : MovieClip;
 		private var holders : MovieClip;
 		private var bg : MovieClip;
