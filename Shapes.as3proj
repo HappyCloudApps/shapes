@@ -17,6 +17,7 @@
   <classpaths>
     <class path="swc" />
     <class path="src" />
+    <class path="libs" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -57,6 +58,7 @@
     <element path="swc\robotlegs-framework-v1.5.2.swc" />
     <element path="swc\SwiftSuspenders-v1.6.0.swc" />
     <element path="swc\greensock.swc" />
+    <element path="swc\as3-signals-v0.8.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

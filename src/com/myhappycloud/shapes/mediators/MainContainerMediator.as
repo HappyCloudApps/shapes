@@ -1,5 +1,6 @@
 package com.myhappycloud.shapes.mediators
 {
+	import com.myhappycloud.shapes.events.ModelEvent;
 	import com.myhappycloud.shapes.events.ViewEvent;
 	import com.myhappycloud.shapes.views.MainContainer;
 	import org.robotlegs.mvcs.Mediator;
@@ -37,6 +38,7 @@ package com.myhappycloud.shapes.mediators
 
 			eventMap.mapListener(eventDispatcher, ViewEvent.RETURN_TO_LAST_SCREEN, goBack, ViewEvent);
 		}
+		
 
 		private function setStatsScreen(e:ViewEvent) : void
 		{

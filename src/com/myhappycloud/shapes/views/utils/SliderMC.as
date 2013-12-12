@@ -4,6 +4,7 @@ package com.myhappycloud.shapes.views.utils
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import org.osflash.signals.Signal;
 	/**
 	 * @author Eder
 	 */
@@ -12,6 +13,8 @@ package com.myhappycloud.shapes.views.utils
 		private var mc : MovieClip;
 		private var btnSlider : MovieClip;
 		private var sliderWidth : Number;
+		private var _value:Number;
+		private var _update:Signal;
 
 		public function SliderMC(mc : MovieClip)
 		{
@@ -21,6 +24,8 @@ package com.myhappycloud.shapes.views.utils
 			sliderWidth = widthMc.width;
 			widthMc.visible = false;
 			btnSlider = MovieClip(mc.getChildByName("btn_slider"));
+			
+			_update = new Signal();
 			
 			btnSlider.addEventListener(MouseEvent.MOUSE_DOWN, onDown, false, 0, true);
 		}
@@ -34,6 +39,28 @@ package com.myhappycloud.shapes.views.utils
 		private function onUp(e : MouseEvent) : void
 		{
 			btnSlider.stopDrag();
+			
+			update.dispatch();
+			
+			_value = btnSlider.x / sliderWidth;
+		}
+		
+		public function get value():Number 
+		{
+			return _value;
+			
+		}
+		
+		public function set value(value:Number):void 
+		{
+			_value = value;
+			
+			btnSlider.x = _value * sliderWidth;
+		}
+		
+		public function get update():Signal 
+		{
+			return _update;
 		}
 	}
 }

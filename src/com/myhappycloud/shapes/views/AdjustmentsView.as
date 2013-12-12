@@ -59,6 +59,16 @@ package com.myhappycloud.shapes.views
 
 			sliderFx = new SliderMC(mc.slider_fx);
 			sliderMusic = new SliderMC(mc.slider_music);
+			
+			sliderFx.update.add(updatedFx);
+		}
+		
+		private function updatedFx():void 
+		{
+			trace(sliderFx.value);
+			var data:Object = new Object();
+			data.volume = sliderFx.value;
+			dispatchEvent(new ModelEvent(ModelEvent.SFX_CHANGE, data));
 		}
 
 		public function setLanguage(lang : String) : void

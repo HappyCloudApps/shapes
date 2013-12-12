@@ -7,6 +7,8 @@ package com.myhappycloud.shapes.events
 	public class ModelEvent extends Event 
 	{
 		public static const LANGUAGE_CHANGE : String = "LANGUAGE_CHANGE";
+		static public const MUSIC_CHANGE:String = "musicChange";
+		static public const SFX_CHANGE:String = "sfxChange";
 
 		private var _type : String;
 		private var _data : Object;		
