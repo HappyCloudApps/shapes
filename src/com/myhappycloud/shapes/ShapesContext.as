@@ -1,6 +1,8 @@
 package com.myhappycloud.shapes
 {
+	import com.myhappycloud.shapes.commands.MusicChangeCommand;
 	import com.myhappycloud.shapes.commands.SetLangCommand;
+	import com.myhappycloud.shapes.commands.SFXChangeCommand;
 	import com.myhappycloud.shapes.events.ModelEvent;
 	import com.myhappycloud.shapes.mediators.MessageParentsMediator;
 	import com.myhappycloud.shapes.mediators.TipsMediator;
@@ -56,6 +58,8 @@ package com.myhappycloud.shapes
 
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitialSetupCommand);
 			commandMap.mapEvent(ModelEvent.LANGUAGE_CHANGE, SetLangCommand);
+			commandMap.mapEvent(ModelEvent.MUSIC_CHANGE, MusicChangeCommand);
+			commandMap.mapEvent(ModelEvent.SFX_CHANGE, SFXChangeCommand);
 
 			//menus
 			mediatorMap.mapView(MainContainer, MainContainerMediator);
