@@ -42,6 +42,7 @@ package com.myhappycloud.shapes
 	import org.robotlegs.mvcs.Context;
 
 	import flash.display.DisplayObjectContainer;
+
 	/**
 	 * @author Eder
 	 */
@@ -61,19 +62,19 @@ package com.myhappycloud.shapes
 			commandMap.mapEvent(ModelEvent.MUSIC_CHANGE, MusicChangeCommand);
 			commandMap.mapEvent(ModelEvent.SFX_CHANGE, SFXChangeCommand);
 
-			//menus
+			// menus
 			mediatorMap.mapView(MainContainer, MainContainerMediator);
 			mediatorMap.mapView(SplashView, SplashViewMediator);
 			mediatorMap.mapView(UserView, UserViewMediator);
 			mediatorMap.mapView(MenuView, MenuMediator);
 			mediatorMap.mapView(VideosView, VideosMediator);
 			mediatorMap.mapView(ParentsView, ParentsMediator);
-			
+
 			mediatorMap.mapView(AdjustmentsView, AdustmentsMediator);
 			mediatorMap.mapView(StatsView, StatsMediator);
 			mediatorMap.mapView(TipsView, TipsMediator);
 			mediatorMap.mapView(MessageParentsView, MessageParentsMediator);
-			
+
 			// game
 			mediatorMap.mapView(GameView, GameMediator);
 			mediatorMap.mapView(Challenge1View, Challenge1Mediator);
@@ -82,9 +83,8 @@ package com.myhappycloud.shapes
 			mediatorMap.mapView(CongratsView, CongratsMediator);
 
 			injector.mapSingletonOf(IUserData, UserData);
-		
+
 			super.startup();
 		}
-
 	}
 }
